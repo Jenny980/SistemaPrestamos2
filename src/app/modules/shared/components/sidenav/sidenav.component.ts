@@ -1,5 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,16 +11,21 @@ export class SidenavComponent implements OnInit {
 
   mobileQuery: MediaQueryList;
   menuNav =[
-    {name: "Home", route: "home", icon: "home"},
-    {name: "Categorias", route: "category", icon: "category"},
-    {name: "Productos", route: "product", icon: "production_quantity_limits"}
+    {name: "Mi cuenta", route: "cuenta", icon: "face_retouching_natural"},
+    {name: "Clientes", route: "clientes", icon: "people_outline"},
+    {name: "Reportes", route: "reportes", icon: "bar_chart"}
   ]
 
   constructor(
+    private router: Router,
     media: MediaMatcher
   ) { this.mobileQuery = media.matchMedia('(max-width: 600px)');}
 
   ngOnInit(): void {
+  }
+
+  cerrar() {
+    this.router.navigate(['/home']);
   }
 
 }

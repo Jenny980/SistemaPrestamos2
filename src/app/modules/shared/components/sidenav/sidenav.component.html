@@ -3,7 +3,7 @@
         <button mat-icon-button (click)="snav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="h1.app-name">S-inventory</h1>
+        <h1 class="h1.app-name">Sistema Prestamos</h1>
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
@@ -16,7 +16,8 @@
                         <mat-icon>person_outline</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item
+                            (click)="cerrar()">
                             <mat-icon>exit_to_app</mat-icon>
                             Cerrar sesión
                         </button>
