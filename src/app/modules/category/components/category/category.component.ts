@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from 'src/app/modules/shared/services/category.service';
+import { ClienteService } from 'src/app/modules/shared/services/cliente.service';
+import { NewClienteComponent } from '../new-cliente/new-cliente.component';
 
 @Component({
   selector: 'app-category',
@@ -9,42 +13,62 @@ import { CategoryService } from 'src/app/modules/shared/services/category.servic
 })
 export class CategoryComponent implements OnInit {
 
-  displayedColumns: String[] = ['id', 'name', 'description', 'actions'];
-  dataSource = new MatTableDataSource<CategoryElement>();
+  displayedColumns: String[] = ['id', 'nombre', 'apellido', 'cc', 'telefono', 'direccion', 'barrio', 'actions'];
+  dataClientes = new MatTableDataSource<ClienteElement>();
+  clientes = [];
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService,
+    private clienteService: ClienteService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getCategories();
+    this.getClientes();
   }
 
-  getCategories(){
-    this.categoryService.getCategories()
+   getClientes(){
+    this.clienteService.getClientes()
     .subscribe( (data: any) => {
-      console.log("respuesta" , data);
-      this.processCategoriesResponse(data);
+      this.ClienteResponse(data);
     }, (error: any) => {
       console.log("error" , error);
     })
   }
 
-  processCategoriesResponse(resp: any){
-    const dataCategory: CategoryElement[] = [];
+  ClienteResponse(resp: any){
     if(resp.metadata[0].Code === '00'){
-
-      let listCategory = resp.categoryResponse.category;
-
-      listCategory.forEach((element: CategoryElement) => {
-        dataCategory.push(element);
-      });
-
-      this.dataSource = new MatTableDataSource<CategoryElement>(dataCategory);
+      this.clientes = resp.clienteResponse.cliente;
+      console.log(this.clientes)
     }
+  }
+
+  openClienteDialog(){
+    const dialogRef = this.dialog.open(NewClienteComponent, {
+      width: '450px'
+    });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1){
+        this.openSnackBar("Cliente registrado", "Exito");
+        this.getClientes();
+      } else if(result == 2){
+        this.openSnackBar("Se produjo un error al registrar el cliente", "Error");
+      }
+    });
+  }
+
+  openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar>{
+    return this.snackBar.open(message, action, {
+      duration: 2000
+    })
   }
 }
 
-export interface CategoryElement {
-  description: string;
+export interface ClienteElement {
   id: number;
-  name: string;
+  nombre: string;
+  apellido: string;
+  cc: number;
+  telefono: number;
+  direccion: string;
+  barrio: string;
 }
