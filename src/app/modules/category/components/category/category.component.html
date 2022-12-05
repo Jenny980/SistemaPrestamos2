@@ -57,7 +57,7 @@
                     <button mat-icon-button color="accent">
                         <mat-icon aria-label="Prestamos">monetization_on</mat-icon>
                     </button>
-                    <button mat-icon-button color="accent">
+                    <button mat-icon-button color="accent" (click)="edit(element.id, element.nombre, element.apellido, element.cc, element.telefono, element.direccion, element.barrio)">
                         <mat-icon aria-label="Edit">edit</mat-icon>
                     </button>
                     <button mat-icon-button color="accent">

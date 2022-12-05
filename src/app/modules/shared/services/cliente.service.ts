@@ -20,4 +20,9 @@ export class ClienteService {
     const endPoint = `${base_url}/clientes`;
     return this.http.post(endPoint, body);
   }
+
+  updateClientes(body: any, id: any){
+    const endPoint = `${base_url}/clientes/${id}`;
+    return this.http.put(endPoint, body);
+  }
 }

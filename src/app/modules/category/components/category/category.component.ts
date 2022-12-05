@@ -61,6 +61,21 @@ export class CategoryComponent implements OnInit {
       duration: 2000
     })
   }
+
+  edit(id: number, nombre: string, apellido: string, cc: number, telefono: number, direccion: string, barrio: string){
+    const dialogRef = this.dialog.open(NewClienteComponent, {
+      width: '450px',
+      data: {id: id, nombre: nombre, apellido: apellido, cc: cc, telefono: telefono, direccion: direccion, barrio: barrio}
+    });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1){
+        this.openSnackBar("Cliente actualizado", "Exito");
+        this.getClientes();
+      } else if(result == 2){
+        this.openSnackBar("Se produjo un error al actualizar el cliente", "Error");
+      }
+    });
+  }
 }
 
 export interface ClienteElement {
