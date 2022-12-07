@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
 import { CategoryService } from 'src/app/modules/shared/services/category.service';
 import { ClienteService } from 'src/app/modules/shared/services/cliente.service';
 import { NewClienteComponent } from '../new-cliente/new-cliente.component';
@@ -20,7 +22,8 @@ export class CategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService,
     private clienteService: ClienteService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getClientes();
@@ -29,13 +32,13 @@ export class CategoryComponent implements OnInit {
    getClientes(){
     this.clienteService.getClientes()
     .subscribe( (data: any) => {
-      this.ClienteResponse(data);
+      this.clienteResponse(data);
     }, (error: any) => {
       console.log("error" , error);
     })
   }
 
-  ClienteResponse(resp: any){
+  clienteResponse(resp: any){
     if(resp.metadata[0].Code === '00'){
       this.clientes = resp.clienteResponse.cliente;
       console.log(this.clientes)
@@ -75,6 +78,24 @@ export class CategoryComponent implements OnInit {
         this.openSnackBar("Se produjo un error al actualizar el cliente", "Error");
       }
     });
+  }
+
+  delete(id: any){
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {id: id}
+    });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1){
+        this.openSnackBar("Cliente eliminado", "Exito");
+        this.getClientes();
+      } else if(result == 2){
+        this.openSnackBar("Se produjo un error al eliminar el cliente", "Error");
+      }
+    });
+  }
+
+  irPrestamos(id: any){
+      this.router.navigate(['/dashboard/prestamos/' + id]);
   }
 }
 

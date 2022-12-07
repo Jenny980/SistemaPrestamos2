@@ -25,4 +25,9 @@ export class ClienteService {
     const endPoint = `${base_url}/clientes/${id}`;
     return this.http.put(endPoint, body);
   }
+
+  deleteClientes(id: any){
+    const endPoint = `${base_url}/clientes/${id}`;
+    return this.http.delete(endPoint);
+  }
 }

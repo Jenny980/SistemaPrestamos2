@@ -9,6 +9,7 @@ import { PrimeraVistaComponent } from './components/primera-vista/primera-vista.
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReportesComponent } from './modules/dashboard/components/reportes/reportes.component';
+import { PrestamosComponent } from './modules/prestamos/components/prestamos/prestamos.component';
 
 @NgModule({
   declarations: [

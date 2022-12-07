@@ -13,11 +13,13 @@ export class NewClienteComponent implements OnInit {
 
   public clienteForm: FormGroup;
   estadoFormulario: string ="";
+
   constructor(private fb: FormBuilder, private clienteService: ClienteService,
     private dialogRef: MatDialogRef<NewClienteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.estadoFormulario = "Agregar";
+    
     this.clienteForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -37,7 +39,6 @@ export class NewClienteComponent implements OnInit {
   }
 
   onSave(){
-
     let data = {
       nombre: this.clienteForm.get('nombre')?.value,
       apellido: this.clienteForm.get('apellido')?.value,
@@ -65,8 +66,6 @@ export class NewClienteComponent implements OnInit {
         this.dialogRef.close(2);
       })
     }
-
-    
   }
 
   onCancel(){
