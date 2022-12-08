@@ -29,7 +29,7 @@ export class NewPrestamoComponent implements OnInit {
       porcentaje: ['', Validators.required],
       periodoPago: ['', Validators.required],
       Npagos: ['', Validators.required],
-      valorCuota: ['', Validators.required],
+      valorCuota: [''],
       debe: ['', Validators.required],
       estado: ['', Validators.required],
       clienteId: ['', Validators.required]
@@ -52,7 +52,9 @@ export class NewPrestamoComponent implements OnInit {
       porcentaje: this.prestamoForm.get('porcentaje')?.value,
       periodoPago: this.prestamoForm.get('periodoPago')?.value,
       Npagos: this.prestamoForm.get('Npagos')?.value,
-      valorCuota: this.prestamoForm.get('valorCuota')?.value,
+
+      //valorCuota: this.prestamoForm.get('valorCuota')?.value,
+      valorCuota: Math.round((this.prestamoForm.get('credito')?.value+this.prestamoForm.get('credito')?.value*this.prestamoForm.get('porcentaje')?.value/100)/this.prestamoForm.get('Npagos')?.value),
       debe: this.prestamoForm.get('debe')?.value,
       estado: this.prestamoForm.get('estado')?.value,
       clienteId: this.idCliente
@@ -63,7 +65,7 @@ export class NewPrestamoComponent implements OnInit {
     formData.append('porcentaje', data.porcentaje);
     formData.append('periodoPago', data.periodoPago);
     formData.append('Npagos', data.Npagos);
-    formData.append('valorCuota', data.valorCuota);
+    formData.append('valorCuota', data.valorCuota+"");
     formData.append('debe', data.debe);
     formData.append('estado', data.estado);
     formData.append('clienteId', data.clienteId+"");
@@ -104,5 +106,6 @@ export class NewPrestamoComponent implements OnInit {
       clienteId: [data.clienteId, Validators.required]
       });
   }
+
 
 }

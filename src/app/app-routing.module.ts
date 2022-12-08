@@ -9,8 +9,7 @@ const routes: Routes = [
   { path: 'dashboard', pathMatch: 'full', redirectTo: '/dashboard' },
   { path: 'registro', component: RegistroComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'init', component: PrimeraVistaComponent},
-  { path: '**', component: PrimeraVistaComponent},
+  { path: '**', component: LoginComponent},
   
 ];
 

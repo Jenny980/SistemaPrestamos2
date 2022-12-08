@@ -1,7 +1,25 @@
-<p>login works!</p>
+<body>      
+        <div id="contenedor">
+            <div id="central">
+                <div id="login">
+                    <div class="titulo">
+                        Bienvenido
+                    </div>
+                    <form id="loginform">
+                        <input type="text" name="usuario" placeholder="Usuario" required>
+                        
+                        <input type="password" placeholder="Contraseña" name="password" required>
+                        
+                    </form>
+                    <button type="submit" title="Ingresar" name="Ingresar" (click)="iniciar()">Login</button>
+                    <div class="pie-form">
+                        <a href="#">¿Perdiste tu contraseña?</a>
+                        <a (click)="irRegistro()">¿No tienes Cuenta? Registrate</a>
+                    </div>
+                </div>
 
-<button
-    class="btn btn-outline-success my-2 my-sm-0 letra"
-    (click)="iniciar()"
-    type="submit">Iniciar
-</button>
+            </div>
+        </div>
+            
+    </body>
+

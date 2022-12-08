@@ -25,7 +25,7 @@ export class SidenavComponent implements OnInit {
   }
 
   cerrar() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
 
 }
