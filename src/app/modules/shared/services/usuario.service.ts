@@ -15,4 +15,9 @@ export class UsuarioService {
     const endPoint = `${base_url}/usuarios/filter/${email}`;
     return this.http.get(endPoint);
   }
+
+  postUsuarios(body: any){
+    const endPoint = `${base_url}/usuarios`;
+    return this.http.post(endPoint, body);
+  }
 }
