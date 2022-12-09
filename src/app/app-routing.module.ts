@@ -6,7 +6,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { DashboardRoutingModule } from './modules/dashboard/dashboard-routing.module';
 
 const routes: Routes = [
-  { path: 'dashboard', pathMatch: 'full', redirectTo: '/dashboard' },
+  //{ path: 'dashboard/:id', pathMatch: 'full', redirectTo: '/dashboard' },
   { path: 'registro', component: RegistroComponent},
   { path: 'login', component: LoginComponent},
   { path: '**', component: LoginComponent},

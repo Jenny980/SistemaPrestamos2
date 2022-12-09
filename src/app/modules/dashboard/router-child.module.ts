@@ -8,7 +8,7 @@ import { ReportesComponent } from './components/reportes/reportes.component';
 
 
 export const childRoutes: Routes = [
-    
+    { path: 'inicio/:id', component: PrimeraVistaComponent },
     { path: 'cuenta', component: HomeComponent },
     { path: 'clientes', component: CategoryComponent },
     { path: 'reportes', component: ReportesComponent },

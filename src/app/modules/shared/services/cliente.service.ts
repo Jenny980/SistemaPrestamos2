@@ -30,4 +30,10 @@ export class ClienteService {
     const endPoint = `${base_url}/clientes/${id}`;
     return this.http.delete(endPoint);
   }
+
+  getClienteByName(nombre: any){
+    const endPoint = `${base_url}/clientes/filter/${nombre}`;
+    return this.http.get(endPoint);
+  }
+
 }

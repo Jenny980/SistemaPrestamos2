@@ -35,4 +35,5 @@ export class PrestamoService {
     const endPoint = `${base_url}/prestamos/${id}`;
     return this.http.delete(endPoint);
   }
+
 }

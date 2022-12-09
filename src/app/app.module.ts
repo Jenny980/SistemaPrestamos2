@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReportesComponent } from './modules/dashboard/components/reportes/reportes.component';
 import { PrestamosComponent } from './modules/prestamos/components/prestamos/prestamos.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,13 @@ import { PrestamosComponent } from './modules/prestamos/components/prestamos/pre
     ReportesComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

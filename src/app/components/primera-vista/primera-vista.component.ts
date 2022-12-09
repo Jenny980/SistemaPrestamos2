@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-primera-vista',
@@ -8,17 +8,17 @@ import { Router } from '@angular/router';
 })
 export class PrimeraVistaComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  idUsuario: any;
+
+  constructor(private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
-
-  irLogin() {
-    this.router.navigate(['/login']);
-  }
-
-  irRegistro() {
-    this.router.navigate(['/registro']);
+    this.activatedRoute.params.subscribe((data) => {
+        this.idUsuario = data['id'];
+        console.log(data)
+    });
+    console.log(this.idUsuario)
   }
 
 }

@@ -2,9 +2,9 @@
     <h2 class="alinear">Listado de clientes</h2>
     <mat-card-header>
         <div>
-            <mat-form-field hintLabel="Busque cliente" appearance="fill">
+            <mat-form-field hintLabel="Busque por el nombre del cliente" appearance="fill">
                 <mat-label>Buscar cliente</mat-label>
-                <input matInput #input >
+                <input matInput #input (keyup)="buscar(input.value)">
             </mat-form-field>
         </div>
     </mat-card-header>

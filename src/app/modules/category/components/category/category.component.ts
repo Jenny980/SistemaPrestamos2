@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
 import { CategoryService } from 'src/app/modules/shared/services/category.service';
 import { ClienteService } from 'src/app/modules/shared/services/cliente.service';
+import { UsuarioService } from 'src/app/modules/shared/services/usuario.service';
 import { NewClienteComponent } from '../new-cliente/new-cliente.component';
 
 @Component({
@@ -27,9 +29,9 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClientes();
-  }
+  }        
 
-   getClientes(){
+  getClientes(){
     this.clienteService.getClientes()
     .subscribe( (data: any) => {
       this.clienteResponse(data);
@@ -41,7 +43,6 @@ export class CategoryComponent implements OnInit {
   clienteResponse(resp: any){
     if(resp.metadata[0].Code === '00'){
       this.clientes = resp.clienteResponse.cliente;
-      console.log(this.clientes)
     }
   }
 
@@ -96,6 +97,18 @@ export class CategoryComponent implements OnInit {
 
   irPrestamos(id: any){
       this.router.navigate(['/dashboard/prestamos/' + id]);
+  }
+
+  buscar(nombre: any){
+    if(nombre.length === 0){
+      return this.getClientes();
+    }
+    this.clienteService.getClienteByName(nombre)
+      .subscribe((resp: any) => {
+        this.clienteResponse(resp);
+      }, (error: any) => {
+         this.clientes = [];
+    }) 
   }
 }
 
