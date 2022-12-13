@@ -36,4 +36,9 @@ export class PrestamoService {
     return this.http.delete(endPoint);
   }
 
+  getPrestamoById(id: number){
+    const endPoint = `${base_url}/prestamos/ ${id}`;
+    return this.http.get(endPoint);
+  }
+
 }

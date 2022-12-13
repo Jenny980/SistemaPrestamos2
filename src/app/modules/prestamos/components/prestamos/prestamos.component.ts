@@ -103,10 +103,10 @@ export class PrestamosComponent implements OnInit {
     });
   }
 
-  openCuotaoDialog( valorCuota: number, idPrestamo: number){
+  openCuotaoDialog( valorCuota: number, idPrestamo: number, debe: number){
       const dialogRef = this.dialog.open(NewCuotaComponent, {
       width: '450px',
-      data: {idPrestamo: idPrestamo, valorCuota: valorCuota}
+      data: {idPrestamo: idPrestamo, valorCuota: valorCuota, debe: debe}
     });
     dialogRef.afterClosed().subscribe((result:any) => {
       if(result == 1){

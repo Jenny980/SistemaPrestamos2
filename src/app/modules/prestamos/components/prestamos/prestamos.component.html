@@ -46,7 +46,7 @@
                 <td mat-cell *matCellDef="let element">{{element.periodoPago}}</td>
             </ng-container>
             <ng-container matColumnDef="Npagos">
-                <th mat-header-cell *matHeaderCellDef>N° pagos</th>
+                <th mat-header-cell *matHeaderCellDef>Pagos restantes</th>
                 <td mat-cell *matCellDef="let element">{{element.npagos}}</td>
             </ng-container>
             <ng-container matColumnDef="valorCuota">
@@ -54,7 +54,7 @@
                 <td mat-cell *matCellDef="let element">$ {{element.valorCuota}}</td>
             </ng-container>
             <ng-container matColumnDef="debe">
-                <th mat-header-cell *matHeaderCellDef>Total a pagar</th>
+                <th mat-header-cell *matHeaderCellDef>Debe</th>
                 <td mat-cell *matCellDef="let element">$ {{element.debe}}</td>
             </ng-container>
             <ng-container matColumnDef="fecha">
@@ -70,7 +70,7 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Acciones</th>
                 <td mat-cell *matCellDef="let element; let i=index;">
-                    <button title="Registrar cuota" mat-icon-button color="accent" (click)="openCuotaoDialog(element.valorCuota, element.id)">
+                    <button title="Registrar cuota" mat-icon-button color="accent" (click)="openCuotaoDialog(element.valorCuota, element.id, element.debe)">
                         <mat-icon aria-label="Registrar cuota">monetization_on</mat-icon>
                     </button>
 
