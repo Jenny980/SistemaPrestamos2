@@ -21,9 +21,4 @@ export class CuotaService {
     return this.http.get(endPoint);
   }
 
-  deleteCuota(id: any){
-    const endPoint = `${base_url}/cuotas/${id}`;
-    return this.http.delete(endPoint);
-  }
-
 }
