@@ -6,6 +6,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { CategoryModule } from '../category/category.module';
 import { PrestamosModule } from '../prestamos/prestamos.module';
+import { MaterialModule } from '../shared/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgChartsModule } from 'ng2-charts';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { PrestamosModule } from '../prestamos/prestamos.module';
     RouterModule,
     SharedModule,
     CategoryModule,
-    PrestamosModule
+    PrestamosModule,
+    MaterialModule,
+    FlexLayoutModule,
+    NgChartsModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

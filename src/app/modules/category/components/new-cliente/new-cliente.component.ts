@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -60,7 +59,6 @@ export class NewClienteComponent implements OnInit {
       //crear nuevo cliente
       this.clienteService.postClientes(data)
       .subscribe((data: any) => {
-        console.log(data);
         this.dialogRef.close(1);
       }, (error: any) => {
         this.dialogRef.close(2);

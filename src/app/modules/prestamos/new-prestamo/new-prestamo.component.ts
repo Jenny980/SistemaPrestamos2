@@ -22,7 +22,6 @@ export class NewPrestamoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       
       this.idCliente = data.clienteId;
-      console.log(this.idCliente);
       this.estadoFormulario = "Agregar"
       this.prestamoForm = this.fb.group({
       credito: ['', Validators.required],
@@ -30,7 +29,7 @@ export class NewPrestamoComponent implements OnInit {
       periodoPago: ['', Validators.required],
       Npagos: ['', Validators.required],
       valorCuota: [''],
-      debe: ['', Validators.required],
+      debe: [''],
       estado: ['', Validators.required],
       clienteId: ['', Validators.required]
       });
@@ -47,6 +46,8 @@ export class NewPrestamoComponent implements OnInit {
   }
 
   onSave(){
+    let saldoTotal = this.prestamoForm.get('credito')?.value + this.prestamoForm.get('credito')?.value * (this.prestamoForm.get('porcentaje')?.value / 100);
+
     let data = {
       credito: this.prestamoForm.get('credito')?.value,
       porcentaje: this.prestamoForm.get('porcentaje')?.value,
@@ -55,7 +56,7 @@ export class NewPrestamoComponent implements OnInit {
 
       //valorCuota: this.prestamoForm.get('valorCuota')?.value,
       valorCuota: Math.round((this.prestamoForm.get('credito')?.value+this.prestamoForm.get('credito')?.value*this.prestamoForm.get('porcentaje')?.value/100)/this.prestamoForm.get('Npagos')?.value),
-      debe: this.prestamoForm.get('debe')?.value,
+      debe: saldoTotal,
       estado: this.prestamoForm.get('estado')?.value,
       clienteId: this.idCliente
     }
@@ -74,7 +75,6 @@ export class NewPrestamoComponent implements OnInit {
       this.prestamoService.updatePrestamo(formData, this.data.id)
         .subscribe((data: any) => {
           this.dialogRef.close(1);
-          console.log(data);
         }, (error: any) => {
           this.dialogRef.close(2);
         });
@@ -82,7 +82,6 @@ export class NewPrestamoComponent implements OnInit {
       this.prestamoService.savePrestamo(formData)
       .subscribe((data: any) => {
         this.dialogRef.close(1);
-        console.log(data);
       }, (error: any) => {
         this.dialogRef.close(2);
       });
@@ -94,7 +93,6 @@ export class NewPrestamoComponent implements OnInit {
   }
 
   updateForm(data: any){
-    console.log(data)
     this.prestamoForm = this.fb.group({
       credito: [data.credito, Validators.required],
       porcentaje: [data.porcentaje, Validators.required],

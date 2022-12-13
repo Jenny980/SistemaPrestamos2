@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this.usuarioService.getUsuarioByEmailAndPass(this.loginForm.value.email)
         .subscribe((resp: any) => {
           if(resp.usuarioResponse.usuario[0].contrasena === this.loginForm.value.password){
-            this.router.navigate(['/dashboard/inicio/' + resp.usuarioResponse.usuario[0].id]);
+            this.router.navigate(['/dashboard/' + resp.usuarioResponse.usuario[0].id + '/inicio']);
           }else {
             this.openSnackBar("Su email y/o contraseña son incorrectos", "Error");
             this.loginForm.get('password')?.setValue(null);

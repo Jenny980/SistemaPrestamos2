@@ -32,21 +32,15 @@
                 <input type="number" matInput placeholder="Número de cuotas" formControlName="Npagos" required>
             </mat-form-field>
 
- 
-
-            <mat-form-field>
-                <input matInput type="number" placeholder="Valor total que debe el cliente" formControlName="debe" required>
-            </mat-form-field>
-
             <label style="color: gray;">Estado</label>
 
                 <div class="form-group">
                 <label>
-                    <input type="radio" id="radioTrue"  value="true"  formControlName="estado"
+                    <input type="radio" id="radioTrue"  value="Activo"  formControlName="estado"
                     > Activo
                 </label>
                 <label>
-                    <input type="radio" id="radioFalse"  value="false"  formControlName="estado"
+                    <input type="radio" id="radioFalse"  value="Inactivo"  formControlName="estado"
                     > Inactivo
                 </label>
                 </div>

@@ -7,10 +7,17 @@
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
-                    <button mat-icon-button>
+                    <button mat-icon-button [matMenuTriggerFor]="menuPre">
                         <mat-icon>help_outline</mat-icon>
                     </button>
+                    <mat-menu #menuPre="matMenu" >
+                        <button style="background-color: white; border-color: white; color: gray; border-bottom: 10px; border-right: 20px; margin: 7px;">
+                            <mat-icon>info</mat-icon>
+                            Sistema para la gestión de clientes, sus respectivos prestamos con reportes de estos y la gestión de usuarios.
+                        </button>
+                    </mat-menu>
                 </li>
+                
                 <li>
                     <button mat-button [matMenuTriggerFor]="menu">
                         <mat-icon>person_outline</mat-icon>
@@ -33,8 +40,8 @@
             <mat-nav-list>
                 <div class="profile-card">
                     <div class="header">
-                        <h2>Administrador</h2>
-                        <h4>administrador@gmail.com</h4>
+                        <h2 style="text-transform: uppercase;">{{nombre}}</h2>
+                        <h4>{{email}}</h4>
                     </div>
                 </div>
                 <mat-divider></mat-divider>

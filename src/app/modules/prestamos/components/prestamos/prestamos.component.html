@@ -38,7 +38,7 @@
                 <td mat-cell *matCellDef="let element">$ {{element.credito}}</td>
             </ng-container>
             <ng-container matColumnDef="porcentaje">
-                <th mat-header-cell *matHeaderCellDef>Tasa porcentual</th>
+                <th mat-header-cell *matHeaderCellDef>Tasa</th>
                 <td mat-cell *matCellDef="let element">{{element.porcentaje}} %</td>
             </ng-container>
             <ng-container matColumnDef="periodoPago">
@@ -54,7 +54,7 @@
                 <td mat-cell *matCellDef="let element">$ {{element.valorCuota}}</td>
             </ng-container>
             <ng-container matColumnDef="debe">
-                <th mat-header-cell *matHeaderCellDef>Debe</th>
+                <th mat-header-cell *matHeaderCellDef>Total a pagar</th>
                 <td mat-cell *matCellDef="let element">$ {{element.debe}}</td>
             </ng-container>
             <ng-container matColumnDef="fecha">
@@ -64,25 +64,17 @@
 
             <ng-container matColumnDef="estado">
                 <th mat-header-cell *matHeaderCellDef>Estado</th>
-                <td mat-cell *matCellDef="let element">
-                    <div *ngIf="element.estado == true">
-                        Activo
-                    </div>
-                    <div *ngIf="element.estado == false">
-                        Inactivo
-                    </div>
-                    
-                </td>
+                <td mat-cell *matCellDef="let element">{{element.estado}}</td>
             </ng-container>
 
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Acciones</th>
                 <td mat-cell *matCellDef="let element; let i=index;">
-                    <button title="Abonos" mat-icon-button color="accent" >
-                        <mat-icon aria-label="Abonos">monetization_on</mat-icon>
+                    <button title="Registrar cuota" mat-icon-button color="accent" (click)="openCuotaoDialog(element.valorCuota, element.id)">
+                        <mat-icon aria-label="Registrar cuota">monetization_on</mat-icon>
                     </button>
 
-                    <button title="Fechas de cobro" mat-icon-button color="accent" >
+                    <button title="Cuotas registradas" mat-icon-button color="accent" (click)="openVerCuota(element.id)" >
                         <mat-icon aria-label="Prestamos">calendar_month</mat-icon>
                     </button>
             

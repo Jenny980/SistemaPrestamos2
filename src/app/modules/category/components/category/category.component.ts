@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
 import { CategoryService } from 'src/app/modules/shared/services/category.service';
 import { ClienteService } from 'src/app/modules/shared/services/cliente.service';
+import { HelpUserService } from 'src/app/modules/shared/services/help-user.service';
 import { UsuarioService } from 'src/app/modules/shared/services/usuario.service';
 import { NewClienteComponent } from '../new-cliente/new-cliente.component';
 
@@ -20,14 +21,17 @@ export class CategoryComponent implements OnInit {
   displayedColumns: String[] = ['id', 'nombre', 'apellido', 'cc', 'telefono', 'direccion', 'barrio', 'actions'];
   dataClientes = new MatTableDataSource<ClienteElement>();
   clientes = [];
+  idUser= 0;
 
-  constructor(private categoryService: CategoryService,
+  constructor(private helpUserService: HelpUserService,
     private clienteService: ClienteService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.helpUserService.idUsuario
+      .subscribe((id: any) => this.idUser = id);
     this.getClientes();
   }        
 
@@ -96,7 +100,7 @@ export class CategoryComponent implements OnInit {
   }
 
   irPrestamos(id: any){
-      this.router.navigate(['/dashboard/prestamos/' + id]);
+      this.router.navigate(['/dashboard/' + this.idUser + '/prestamos/' + id]);
   }
 
   buscar(nombre: any){

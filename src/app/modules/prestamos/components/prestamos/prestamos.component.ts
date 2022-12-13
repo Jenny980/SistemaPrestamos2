@@ -6,6 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { NewPrestamoComponent } from '../../new-prestamo/new-prestamo.component';
 import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
+import { NewCuotaComponent } from '../../new-cuota/new-cuota.component';
+import { VerCuotasComponent } from '../../ver-cuotas/ver-cuotas.component';
+import { CuotaService } from 'src/app/modules/shared/services/cuota.service';
 
 @Component({
   selector: 'app-prestamos',
@@ -18,6 +21,7 @@ export class PrestamosComponent implements OnInit {
   prestamos = [];
 
   constructor(private activatedRoute: ActivatedRoute,
+    private cuotaService: CuotaService,
     private _location: Location,
     private prestamoService: PrestamoService,
     public dialog: MatDialog,
@@ -46,7 +50,6 @@ export class PrestamosComponent implements OnInit {
   }
 
   prestamoResponse(resp: any){
-      console.log(resp)
       this.prestamos = resp.prestamoResponse.prestamos;
   }
 
@@ -71,8 +74,7 @@ export class PrestamosComponent implements OnInit {
     })
   }
 
-  edit(id: number, credito: number, porcentaje: number, periodoPago: string, Npagos: number, valorCuota: number, debe: number, estado: boolean, clienteId: any){
-    console.log(porcentaje)
+  edit(id: number, credito: number, porcentaje: number, periodoPago: string, Npagos: number, valorCuota: number, debe: number, estado: String, clienteId: any){
     const dialogRef = this.dialog.open(NewPrestamoComponent, {
       width: '450px',
       data: {id: id, credito: credito, porcentaje: porcentaje, periodoPago: periodoPago, Npagos: Npagos, valorCuota: valorCuota, debe: debe, estado: estado, clienteId: clienteId}
@@ -99,5 +101,42 @@ export class PrestamosComponent implements OnInit {
         this.openSnackBar("Se produjo un error al eliminar el prestamo", "Error");
       }
     });
+  }
+
+  openCuotaoDialog( valorCuota: number, idPrestamo: number){
+      const dialogRef = this.dialog.open(NewCuotaComponent, {
+      width: '450px',
+      data: {idPrestamo: idPrestamo, valorCuota: valorCuota}
+    });
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1){
+        this.openSnackBar("Cuota registrada", "Exito");
+        this.getPrestamos(this.idCliente);
+      } else if(result == 2){
+        this.openSnackBar("Se produjo un error al registrar la cuota", "Error");
+      }
+    });
+  }
+
+  openVerCuota(id: number){
+    this.cuotaService.getCuotaByPrestamo(id)
+      .subscribe((resp: any) => {
+        const dialogRef = this.dialog.open(VerCuotasComponent, {
+          width: '450px',
+          data: {id: id}
+        });
+        dialogRef.afterClosed().subscribe((result:any) => {
+          if(result == 1){
+            this.openSnackBar("Cuota registrada", "Exito");
+            this.getPrestamos(this.idCliente);
+          } else if(result == 2){
+            this.openSnackBar("Se produjo un error al registrar la cuota", "Error");
+          }
+        });
+      }, (error: any) => {
+      console.log("error" , error);
+      this.openSnackBar("No hay cuotas registradas", "Información");
+    })
+    
   }
 }

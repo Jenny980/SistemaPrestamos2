@@ -5,6 +5,8 @@ import { MaterialModule } from '../shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewPrestamoComponent } from './new-prestamo/new-prestamo.component';
+import { NewCuotaComponent } from './new-cuota/new-cuota.component';
+import { VerCuotasComponent } from './ver-cuotas/ver-cuotas.component';
 
 
 
@@ -12,7 +14,9 @@ import { NewPrestamoComponent } from './new-prestamo/new-prestamo.component';
 @NgModule({
   declarations: [
     PrestamosComponent,
-    NewPrestamoComponent
+    NewPrestamoComponent,
+    NewCuotaComponent,
+    VerCuotasComponent
   ],
   imports: [
     CommonModule,

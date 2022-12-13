@@ -12,6 +12,7 @@ import { ReportesComponent } from './modules/dashboard/components/reportes/repor
 import { PrestamosComponent } from './modules/prestamos/components/prestamos/prestamos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HelpUserService } from './modules/shared/services/help-user.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [HelpUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

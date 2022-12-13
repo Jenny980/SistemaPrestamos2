@@ -20,4 +20,14 @@ export class UsuarioService {
     const endPoint = `${base_url}/usuarios`;
     return this.http.post(endPoint, body);
   }
+
+  getUserById(id: any){
+    const endPoint = `${base_url}/usuarios/${id}`;
+    return this.http.get(endPoint);
+  }
+
+  updateUser(body: any, id: any){
+    const endPoint = `${base_url}/usuarios/${id}`;
+    return this.http.put(endPoint, body);
+  } 
 }
