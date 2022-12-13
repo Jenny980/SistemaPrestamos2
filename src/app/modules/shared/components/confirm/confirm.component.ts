@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClienteService } from '../../services/cliente.service';
+import { CuotaService } from '../../services/cuota.service';
 import { PrestamoService } from '../../services/prestamo.service';
 
 @Component({
@@ -9,28 +10,50 @@ import { PrestamoService } from '../../services/prestamo.service';
   styleUrls: ['./confirm.component.css']
 })
 export class ConfirmComponent implements OnInit {
-
+  idCuotas= [];
   constructor(public dialogRef: MatDialogRef<ConfirmComponent>,
-    @Inject (MAT_DIALOG_DATA) public data: any, private clienteService: ClienteService,
+    @Inject (MAT_DIALOG_DATA) public data: any, private clienteService: ClienteService, private cuotaService: CuotaService,
     private prestamoService: PrestamoService) { }
 
   ngOnInit(): void {
+    
   }
+
+
+  getCuotas(id: number){
+    this.cuotaService.getCuotaByPrestamo(id)
+      .subscribe((resp: any) => {
+        resp.cuotaResponse.cuotas.forEach((element: any) => {
+          this.cuotaService.deleteCuota(element.id)
+            .subscribe((data: any) => {
+          }, (error: any) =>{
+          })
+        });
+        this.prestamoService.deletePrestamo(this.data.id)
+        .subscribe((data: any) => {
+          this.dialogRef.close(1);
+        }, (error: any) =>{
+          this.dialogRef.close(2);
+        })
+
+      }, (error: any) => {
+      console.log("error" , error);
+
+    })
+  }
+
+  
 
   onNoClick(){
     this.dialogRef.close(3);
   }
 
   delete(){
-    console.log(this.data.prestamo)
-    console.log("fsdfsdfs")
     if(this.data.prestamo == true){
-      this.prestamoService.deletePrestamo(this.data.id)
-        .subscribe((data: any) => {
-          this.dialogRef.close(1);
-        }, (error: any) =>{
-          this.dialogRef.close(2);
-        })
+      this.getCuotas(this.data.id);
+
+
+      
     } else {
       if(this.data != null){
       this.clienteService.deleteClientes(this.data.id)
